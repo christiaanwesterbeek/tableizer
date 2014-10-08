@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <title>Tableizer</title>
+  <meta charset="UTF-8">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="resources/css/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="resources/css/css-classes.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="resources/css/screen2.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+<div class="container">
+    <div class="banner clear">
+      <div class="left">
+        <h1 id="headerText">
+          TABLEizer
+        </h1>
+        <h3>
+          Converts tabular data into formatted HTML
+        </h3>
+
+        <p>Want more from TABLEizer? Try <a href="http://pro.jsonlint.com">TABLEizer Pro</a></p>
+      </div>
+      <div class="right span-12 unimportant" style="text-align: right;">
+        <div>
+          <a href="http://devotis.nl"><img src="http://devotis.nl/img/logo.png"></a>
+        </div>
+        <div>
+          A tool from Devotis. <a href="https://www.github.com/devotis/tableizer" id="sourceLink" onclick="javascript: pageTracker._trackPageview('/sourceLink');" name="sourceLink">Source is on GitHub.</a><br>
+          Inspired by <a href="http://tableizer.journalistopia.com/">TABLEIZED</a> by <a href="http://journalistopia.com" title="Danny Sanchez">Danny Sanchez</a><br />
+          However that's server side. This is pure Javascript on the client-side.<br />
+          And this transposes too.
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div style="padding-right: 10px;">
+      <textarea id="source" name="source" rows="30" cols="100" spellcheck="false" placeholder="Paste tabular data here." wrap="off" style="resize: both; width: 100%;"></textarea>
+    </div>
+    <div id="target" style="resize: both; width: 889px; max-width: 883px;">
+      target here...
+    </div>
+    <div id="faq" class="hide">
+      <h3>
+        FAQ
+      </h3>
+      <hr>
+      <div id="faqAccordion">
+        <h5>
+          What is TABLEizer?
+        </h5>
+        <div>
+          <p>
+            comes here
+          </p>
+        </div>
+        <h5>
+          Who made this?
+        </h5>
+        <div>
+          <p>
+            <a href="http://www.umbrae.net/">Christiaan Westerbeek</a> built this for everyone that like tableizer by Danny Sanchez, but doesn't like that's a server side soliution or needs transposition of data before formatting.
+          </p>
+        </div>
+        <h5>
+          I've got feedback!
+        </h5>
+        <div>
+          Excellent. Tell me about it. chris@devotis.nl.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-route.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-sanitize.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.compat.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+</body>
+</html>
