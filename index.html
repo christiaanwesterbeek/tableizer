@@ -47,6 +47,11 @@
         placeholder="Paste tabular data here."
         wrap="off"
         style="resize: both; width: 100%;"></textarea>
+      <input
+        type="checkbox"
+        ng-model="transposed"
+        ng-change="transform()"
+      >
     </div>
     <div ng-bind="target.value" style="width: 889px; max-width: 883px;"></div>
     <div id="faq" class="hide">

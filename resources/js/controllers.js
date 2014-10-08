@@ -14,6 +14,10 @@ angular.module('myApp.controllers', [])
       if (a.length === 0) return;
       
       a = _.map(a, function(item) { return item.split(/\t/); });
+
+      if ($scope.transposed) 
+        a = _.zip.apply(_, a); //http://stackoverflow.com/a/17428779/1385429
+
       return a;
     }
 
@@ -21,7 +25,7 @@ angular.module('myApp.controllers', [])
 
     $scope.transform = function() {
       var html = tab2html($scope.source);
-      console.log(html);
+      console.log(html, $scope.transposed);
 
       $scope.target = {
         value: html
