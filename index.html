@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<div class="container">
+<div class="container" ng-controller="MainCtrl">
     <div class="banner clear">
       <div class="left">
         <h1 id="headerText">
@@ -39,11 +39,16 @@
     </div>
     <hr>
     <div style="padding-right: 10px;">
-      <textarea id="source" name="source" rows="30" cols="100" spellcheck="false" placeholder="Paste tabular data here." wrap="off" style="resize: both; width: 100%;"></textarea>
+      <textarea
+        ng-model="source"
+        ng-change="transform()"
+        rows="30" cols="100"
+        spellcheck="false"
+        placeholder="Paste tabular data here."
+        wrap="off"
+        style="resize: both; width: 100%;"></textarea>
     </div>
-    <div id="target" style="resize: both; width: 889px; max-width: 883px;">
-      target here...
-    </div>
+    <div ng-bind="target.value" style="width: 889px; max-width: 883px;"></div>
     <div id="faq" class="hide">
       <h3>
         FAQ
@@ -80,10 +85,10 @@
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-route.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-sanitize.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.compat.min.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
+  <script src="resources/js/app.js"></script>
+  <script src="resources/js/services.js"></script>
+  <script src="resources/js/controllers.js"></script>
+  <script src="resources/js/filters.js"></script>
+  <script src="resources/js/directives.js"></script>
 </body>
 </html>
