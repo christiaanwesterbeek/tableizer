@@ -33,6 +33,11 @@ angular.module('myApp.controllers', [])
       a = '<table border=1><tr>' + a.join('</tr><tr>') + '</tr></table>';
       console.log(a);
 
+      //layout ideas:
+      //- http://jsfiddle.net/mjaric/pJ5BR/
+      //- http://stackoverflow.com/questions/21375073/best-way-to-represent-a-grid-or-table-in-angularjs-with-bootstrap-3
+      //- http://stackoverflow.com/questions/13813254/how-do-i-conditionally-apply-css-styles-in-angularjs
+
       return a;
     }
 
