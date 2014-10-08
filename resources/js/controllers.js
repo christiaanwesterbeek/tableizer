@@ -9,14 +9,23 @@ angular.module('myApp.controllers', [])
     function tab2html(s) {
       if (!s) return;
       
+      //split on line breaks
       var a = s.split(/\n\r?/);
       
       if (a.length === 0) return;
       
+      //split each line on tabs
       a = _.map(a, function(item) { return item.split(/\t/); });
 
+      //potentially transpose
       if ($scope.transposed) 
         a = _.zip.apply(_, a); //http://stackoverflow.com/a/17428779/1385429
+
+      //convert to html
+      console.log(a);
+      a = _.map(a, function(item) { return '<td>' + item.join('</td><td>') + '</td>'; });
+      a = '<table border=1><tr>' + all.join('</tr><tr>') + '</tr></table>';
+      console.log(a);
 
       return a;
     }
@@ -25,7 +34,6 @@ angular.module('myApp.controllers', [])
 
     $scope.transform = function() {
       var html = tab2html($scope.source);
-      console.log(html, $scope.transposed);
 
       $scope.target = {
         value: html
