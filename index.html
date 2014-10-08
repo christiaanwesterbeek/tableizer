@@ -52,6 +52,11 @@
         ng-model="transposed"
         ng-change="transform()"
       > transpose
+      <input
+        type="checkbox"
+        ng-model="dedupmulti"
+        ng-change="transform()"
+      > deduplicate multiple consecutive line breaks
     </div>
     <div ng-bind-html="target.value" style="width: 889px; max-width: 883px;"></div>
     <div id="faq" class="hide">

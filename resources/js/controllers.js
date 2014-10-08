@@ -5,12 +5,18 @@
 angular.module('myApp.controllers', [])
   .controller('MainCtrl', ['$scope', function($scope) {
     $scope.transposed = false;
+    $scope.dedupmulti = true;
 
     function tab2html(s) {
       if (!s) return;
-      
+
+      //deduplicate multiple consecutive line breaks
+      if ($scope.dedupmulti) 
+        s = s.replace(/(\n\r?)+/g, '\n');
+
       //split on line breaks
       var a = s.split(/\n\r?/);
+      console.log(a);
       
       if (a.length === 0) return;
       
