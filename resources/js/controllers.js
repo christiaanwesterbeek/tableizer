@@ -24,7 +24,7 @@ angular.module('myApp.controllers', [])
       //convert to html
       console.log(a);
       a = _.map(a, function(item) { return '<td>' + item.join('</td><td>') + '</td>'; });
-      a = '<table border=1><tr>' + all.join('</tr><tr>') + '</tr></table>';
+      a = '<table border=1><tr>' + a.join('</tr><tr>') + '</tr></table>';
       console.log(a);
 
       return a;
