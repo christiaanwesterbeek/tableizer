@@ -1,0 +1,4 @@
+.ghostTd {width:auto; height:auto; padding:2px 8px; border:1px solid #000; position:absolute; font:normal 10px arial; background:#eee;}
+.dragging {background:#eee; color:#000}
+.hovering {background:#ccc; color:#555}
+ 

@@ -40,14 +40,15 @@ angular.module('myApp.controllers', [])
       });
 
       s = [
-        '<table class="tableizer">',
+        '<table class="tableizer" id="tableOne">',
         '  <thead>',
         '    <tr>' + a.shift() + '</tr>', //shift returns removed item
         '  </thead>', 
         '  <tbody>',
         '     <tr>' + a.join('</tr><tr>') + '</tr>',
         '  </tbody>',
-        '</table>'
+        '</table>',
+        '<script type="text/javascript-lazy">var t1=new dragTable(\'tableOne\')</script>'
       ].join('\n');
 
       console.log(s);
@@ -57,7 +58,7 @@ angular.module('myApp.controllers', [])
       //- http://stackoverflow.com/questions/21375073/best-way-to-represent-a-grid-or-table-in-angularjs-with-bootstrap-3
       //- http://stackoverflow.com/questions/13813254/how-do-i-conditionally-apply-css-styles-in-angularjs
 
-      //draggable columns:
+      //draggable columns thanks to:
       //- http://www.danvk.org/wp/dragtable/
       //- http://bytes.com/topic/javascript/insights/750692-drag-drop-table-columns-new-version-explained
 
@@ -72,4 +73,8 @@ angular.module('myApp.controllers', [])
       $scope.target = html || emptyText;
     };
 
-  }]);
+  }]).filter('unsafe', ['$sce', function ($sce) {
+    return function (val) {
+        return $sce.trustAsHtml(val);
+    };
+}]);

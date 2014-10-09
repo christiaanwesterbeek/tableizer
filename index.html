@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="resources/css/screen.css" type="text/css" media="screen, projection">
   <link rel="stylesheet" href="resources/css/css-classes.css" type="text/css" media="screen, projection">
   <link rel="stylesheet" href="resources/css/screen2.css" type="text/css" media="screen, projection">
+  <script src="resources/js/dragndrop.js"></script>
+  <link rel="stylesheet" href="resources/css/dragndrop.css">
 </head>
 
 <body>
@@ -59,7 +61,7 @@
       > deduplicate multiple consecutive line breaks
     </div>
     <hr>
-    <div ng-bind-html="target" style="width: 889px; max-width: 883px;"></div>
+    <div ng-bind-html="target | unsafe" style="width: 889px; max-width: 883px;"></div>
     <div id="faq" class="hide">
       <h3>
         FAQ
@@ -96,6 +98,7 @@
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-route.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-sanitize.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.compat.min.js"></script>
+  <script src="resources/js/angular-loadscript.js"></script>
   <script src="resources/js/app.js"></script>
   <script src="resources/js/services.js"></script>
   <script src="resources/js/controllers.js"></script>
