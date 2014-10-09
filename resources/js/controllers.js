@@ -4,8 +4,11 @@
 /* Controllers */
 angular.module('myApp.controllers', [])
   .controller('MainCtrl', ['$scope', function($scope) {
+    var emptyText= '<i>Formatted table will appear here. Paste your tabular data in the area above.</i>';
     $scope.transposed = false;
     $scope.dedupmulti = true;
+    $scope.target     = emptyText;
+
 
     function tab2html(s) {
       if (!s) return;
@@ -66,9 +69,7 @@ angular.module('myApp.controllers', [])
     $scope.transform = function() {
       var html = tab2html($scope.source);
 
-      $scope.target = {
-        value: html
-      };
+      $scope.target = html || emptyText;
     };
 
   }]);
