@@ -29,16 +29,36 @@ angular.module('myApp.controllers', [])
 
       //convert to html
       console.log(a);
-      a = _.map(a, function(item) { return '<td>' + item.join('</td><td>') + '</td>'; });
-      a = '<table border=1><tr>' + a.join('</tr><tr>') + '</tr></table>';
-      console.log(a);
+      var sep = 'th', line;
+      a = _.map(a, function(item) {
+        line = '<'+sep+'>' + item.join('</'+sep+'><'+sep+'>') + '</'+sep+'>';
+        sep = 'td';
+        return line;
+      });
+
+      s = [
+        '<table border=1>',
+        '  <thead>',
+        '    <tr>' + a.shift() + '</tr>', //shift returns removed item
+        '  </thead>', 
+        '  <tbody>',
+        '     <tr>' + a.join('</tr><tr>') + '</tr>',
+        '  </tbody>',
+        '</table>'
+      ].join('\n');
+
+      console.log(s);
 
       //layout ideas:
       //- http://jsfiddle.net/mjaric/pJ5BR/
       //- http://stackoverflow.com/questions/21375073/best-way-to-represent-a-grid-or-table-in-angularjs-with-bootstrap-3
       //- http://stackoverflow.com/questions/13813254/how-do-i-conditionally-apply-css-styles-in-angularjs
 
-      return a;
+      //draggable columns:
+      //- http://www.danvk.org/wp/dragtable/
+      //- http://bytes.com/topic/javascript/insights/750692-drag-drop-table-columns-new-version-explained
+
+      return s;
     }
 
     //options: trim all values, transpose, remove trailing lines
