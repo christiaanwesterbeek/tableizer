@@ -37,7 +37,7 @@ angular.module('myApp.controllers', [])
       });
 
       s = [
-        '<table border=1>',
+        '<table class="tableizer">',
         '  <thead>',
         '    <tr>' + a.shift() + '</tr>', //shift returns removed item
         '  </thead>', 
