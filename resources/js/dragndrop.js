@@ -12,7 +12,7 @@
  
 */
  
-function dragTable(id) {
+function dragTable(id, onDrop) {
 // store the cell that will be dragged
 this.draggedCell = null
 // true if ghostTd exists
@@ -35,6 +35,8 @@ this.y;
 this.oldIndex;
 // store the index of the destionation of the column
 this.newIndex;
+//Store the optional method to execute instead of the sortColumn
+this.onDrop = onDrop;
  
     for (x=0; x<this.handler.length; x++) {
     // associate the object with the cells
@@ -143,8 +145,12 @@ this.ghostCreated = false
     }
  
 // start the function to sort the column
-dragObj.sortColumn(this.oldIndex,this.newIndex)
- 
+if (this.onDrop) {
+  this.onDrop.call(this, this.oldIndex,this.newIndex);
+} else {
+  dragObj.sortColumn(this.oldIndex,this.newIndex)    
+}
+
 // remove visual effect from column being dragged
 this.draggedCell.className = ""
 // clear the variable
