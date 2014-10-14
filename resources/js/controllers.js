@@ -118,7 +118,7 @@ angular.module('myApp.controllers', [])
     $scope.transform = function() {
       $scope.array  = $scope.tab2array();
       $scope.target = $scope.formatter();
-      $scope.message = 'Psst, try to drag the columns...';
+      $scope.message = 'Psst, try to drag the columns...<span class="delete-column" style="border: 2px dashed #ccc;">or drop here to delete it.</span>';
     };
     $scope.transpose = function() {
       if (!$scope.array) {
@@ -127,7 +127,7 @@ angular.module('myApp.controllers', [])
       $scope.array = _.zip.apply(_, $scope.array); //http://stackoverflow.com/a/17428779/1385429
       $scope.source = $scope.array2tab();
       $scope.target = $scope.formatter();
-      $scope.message = 'Psst, try to drag the columns...';
+      $scope.message = 'Psst, try to drag the columns...<span class="delete-column" style="border: 2px dashed #ccc;">or drop here to delete it.</span>';
     };
 
   }])

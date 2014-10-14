@@ -60,10 +60,9 @@
         ng-model="dedupmulti"
         ng-change="transform()"
       > deduplicate multiple consecutive line breaks
-      <span class="delete-column" style="border: 3px dashed #ccc; padding: 10px; background: #fff; min-height: 200px;">Drop column here to delete it.</span>
     </div>
     <hr>
-    <span ng-bind="message" class="unimportant"></span>
+    <span ng-bind-html="message | unsafe" class="unimportant"></span>
     <div ng-bind-html="target | unsafe" style="width: 889px; max-width: 883px;"></div>
     <div id="faq" class="hide">
       <h3>
