@@ -1,74 +1,109 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <title>Tableizer</title>
+  <meta charset="UTF-8">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <link  href="https://raw.githubusercontent.com/devotis/tableizer/master/resources/css/screen.css" rel="stylesheet" type="text/css" media="screen, projection">
+  <link  href="https://raw.githubusercontent.com/devotis/tableizer/master/resources/css/css-classes.css" rel="stylesheet" type="text/css" media="screen, projection">
+  <link  href="https://raw.githubusercontent.com/devotis/tableizer/master/resources/css/screen2.css" rel="stylesheet" type="text/css" media="screen, projection">
+  <link  href="https://raw.githubusercontent.com/devotis/tableizer/master/resources/css/dragndrop.css" rel="stylesheet">
+  <script src="https://raw.githubusercontent.com/devotis/tableizer/master/resources/js/dragndrop.js"></script>
+</head>
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Tableizer : A client side solution that let&#39;s you turn tabular data that you might copy from Excel or Google Spreadsheet into a html formatted table to paste in an email">
+<body>
+<div class="container" ng-controller="MainCtrl">
+    <div class="banner clear">
+      <div class="left">
+        <h1 id="headerText">
+          TABLEizer
+        </h1>
+        <h3>
+          Converts tabular data into formatted HTML
+        </h3>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Tableizer</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/devotis/tableizer">View on GitHub</a>
-
-          <h1 id="project_title">Tableizer</h1>
-          <h2 id="project_tagline">Turn tabular data into a html formatted table</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/devotis/tableizer/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/devotis/tableizer/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+        <p>Want more from TABLEizer? Let me know at chris@devotis.nl.</p>
+      </div>
+      <div class="right span-12 unimportant" style="text-align: right;">
+        <div>
+          <a href="http://devotis.nl"><img src="http://devotis.nl/img/logo.png"></a>
+        </div>
+        <div>
+          A tool from Devotis. <a href="https://www.github.com/devotis/tableizer" id="sourceLink" onclick="javascript: pageTracker._trackPageview('/sourceLink');" name="sourceLink">Source is on GitHub.</a><br>
+          Inspired by <a href="http://tableizer.journalistopia.com/">TABLEIZED</a> by <a href="http://journalistopia.com" title="Danny Sanchez">Danny Sanchez</a><br />
+          However that's server side. This is pure Javascript on the client-side.<br />
+          And this transposes too.<br />
+          What, draggable columns too?!
+        </div>
+      </div>
     </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
-<a name="tableizer" class="anchor" href="#tableizer"><span class="octicon octicon-link"></span></a>tableizer</h1>
-
-<p>A client side solution that let's you turn tabular data that you might copy from Excel or Google Spreadsheet into a html formatted table to paste in an email.</p>
-
-<p>It's inspired by <a href="http://tableizer.journalistopia.com">tableizer.journalistopia.com</a>. I didn't like the fact that it's a server side solution and I often need to drag columns, delete them or tranpose the whole thing.</p>
-
-<h2>
-<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
-
-<ul>
-<li>pure javascript</li>
-<li>transpose</li>
-<li>drag/reorder columns</li>
-<li>delete columns</li>
-</ul>
-      </section>
+    <hr>
+    <div style="padding-right: 10px;">
+      <textarea
+        ng-model="source"
+        ng-change="transform()"
+        rows="30" cols="100"
+        spellcheck="false"
+        placeholder="Paste tabular data here."
+        wrap="off"
+        style="resize: both; width: 100%;"></textarea>
+      <input
+        type="button"
+        value="transpose"
+        ng-click="transpose()"
+      >
+      <input
+        type="checkbox"
+        ng-model="dedupmulti"
+        ng-change="transform()"
+      > deduplicate multiple consecutive line breaks
     </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Tableizer maintained by <a href="https://github.com/devotis">devotis</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
+    <hr>
+    <span ng-bind-html="message | unsafe" class="unimportant"></span>
+    <div ng-bind-html="target | unsafe" style="width: 889px; max-width: 883px;"></div>
+    <div id="faq" class="hide">
+      <h3>
+        FAQ
+      </h3>
+      <hr>
+      <div id="faqAccordion">
+        <h5>
+          What is TABLEizer?
+        </h5>
+        <div>
+          <p>
+            comes here
+          </p>
+        </div>
+        <h5>
+          Who made this?
+        </h5>
+        <div>
+          <p>
+            <a href="http://www.umbrae.net/">Christiaan Westerbeek</a> built this for everyone that like tableizer by Danny Sanchez, but doesn't like that's a server side soliution or needs transposition of data before formatting.
+          </p>
+        </div>
+        <h5>
+          I've got feedback!
+        </h5>
+        <div>
+          Excellent. Tell me about it. chris@devotis.nl.
+        </div>
+      </div>
     </div>
+  </div>
 
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-27654849-4");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-
-  </body>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-route.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-sanitize.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.compat.min.js"></script>
+  <script src="https://raw.githubusercontent.com/devotis/tableizer/master/resources/js/app.js"></script>
+  <script src="https://raw.githubusercontent.com/devotis/tableizer/master/resources/js/services.js"></script>
+  <script src="https://raw.githubusercontent.com/devotis/tableizer/master/resources/js/controllers.js"></script>
+  <script src="https://raw.githubusercontent.com/devotis/tableizer/master/resources/js/filters.js"></script>
+  <script src="https://raw.githubusercontent.com/devotis/tableizer/master/resources/js/directives.js"></script>
+</body>
 </html>
