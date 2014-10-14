@@ -123,8 +123,9 @@ angular.module('myApp.controllers', [])
       $scope.message = 'Psst, try to drag the columns...';
     };
 
-  }]).filter('unsafe', ['$sce', function ($sce) {
+  }])
+  .filter('unsafe', ['$sce', function ($sce) {
     return function (val) {
         return $sce.trustAsHtml(val);
     };
-}]);
+  }]);
