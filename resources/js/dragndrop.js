@@ -146,7 +146,7 @@ dragTable.prototype.drop = function(dragObj,e) {
  
   // start the function to sort the column
   if (this.onDrop) {
-    this.onDrop.call(this, this.oldIndex,this.newIndex);
+    this.onDrop.call(this, this.oldIndex,this.newIndex, e.targElm);
   } else {
     dragObj.sortColumn(this.oldIndex,this.newIndex)    
   }

@@ -12,17 +12,24 @@ window._scope = function(selector){
   return angular.element(selector).scope();
 };
 
-window._swapColumns = function(oldIndex, newIndex) {
+window._swapColumns = function(oldIndex, newIndex, droppedElm) {
   //get the angular scope
   var scope = _scope('[ng-controller=MainCtrl]');
 
-  //convert the thing in the textarea to an array
+  //convert the thing in the textarea to an array if it's not there yet
   if (!scope.array) {
     scope.array = scope.tab2array();
   }
 
-  //swap the indexes of each row
-  scope.array = _.map(scope.array, function(item) { return item.swapItems(oldIndex, newIndex); });
+  if (newIndex === false && droppedElm.className == 'delete-column') {
+    scope.array = _.map(scope.array, function(item) { item.splice(oldIndex, 1); return item; });
+  } else if (newIndex !== false) {
+    //swap the indexes of each row
+    scope.array = _.map(scope.array, function(item) { return item.swapItems(oldIndex, newIndex); });
+  } else {
+    scope.$apply();
+    return;
+  }
   //and then continue to do as with transpose :)
   scope.source = scope.array2tab();
   scope.target = scope.formatter();
