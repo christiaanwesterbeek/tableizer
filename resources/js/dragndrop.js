@@ -134,15 +134,15 @@ dragTable.prototype.drop = function(dragObj,e) {
   if (e.targElm.cellIndex !="undefined") {
     checkTable = e.targElm
  
-      // ascend in the dom beggining in the targeted element and ending in a table or the body tag
-      while (checkTable.tagName.toLowerCase() !="table") {
-        if (checkTable.tagName.toLowerCase() == "html") break
-        checkTable = checkTable.parentNode
-      }
-
-      // check if the table where the column was dropped is equal to the object table
-      checkTable == this.table ? this.newIndex = e.targElm.cellIndex : false
+    // ascend in the dom beggining in the targeted element and ending in a table or the body tag
+    while (checkTable.tagName.toLowerCase() !="table") {
+      if (checkTable.tagName.toLowerCase() == "html") break
+      checkTable = checkTable.parentNode
     }
+
+    // check if the table where the column was dropped is equal to the object table
+    checkTable == this.table ? this.newIndex = e.targElm.cellIndex : false
+  }
  
   // start the function to sort the column
   if (this.onDrop) {
