@@ -10,3 +10,7 @@ It's inspired by [tableizer.journalistopia.com](http://tableizer.journalistopia.
 - transpose
 - drag/reorder columns
 - delete columns
+
+##Demo##
+
+http://devotis.nl/tableizer/
