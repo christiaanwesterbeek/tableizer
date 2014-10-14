@@ -141,7 +141,7 @@ dragTable.prototype.drop = function(dragObj,e) {
     }
 
     // check if the table where the column was dropped is equal to the object table
-    checkTable == this.table ? this.newIndex = e.targElm.cellIndex : false
+    this.newIndex = (checkTable == this.table ? e.targElm.cellIndex :  false );
   }
  
   // start the function to sort the column
