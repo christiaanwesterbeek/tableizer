@@ -17,14 +17,15 @@ window._swapColumns = function(oldIndex, newIndex) {
   var scope = _scope('[ng-controller=MainCtrl]');
 
   //convert the thing in the textarea to an array
-  var a = scope.tab2array(scope.source);
+  if (!scope.array) {
+    scope.array = scope.tab2array();
+  }
 
   //swap the indexes of each row
-  a = _.map(a, function(item) { return item.swapItems(oldIndex, newIndex); });
-
-  //
-  scope.source = scope.array2tab(a);
-  scope.transform();
+  scope.array = _.map(scope.array, function(item) { return item.swapItems(oldIndex, newIndex); });
+  //and then continue to do as with transpose :)
+  scope.source = scope.array2tab();
+  scope.target = scope.formatter();
   scope.$apply();
 }
 
@@ -32,13 +33,15 @@ window._swapColumns = function(oldIndex, newIndex) {
 angular.module('myApp.controllers', [])
   .controller('MainCtrl', ['$scope', function($scope) {
     var emptyText= '<i>Formatted table will appear here. Paste your tabular data in the area above.</i>';
-    $scope.transposed = false;
     $scope.dedupmulti = true;
     $scope.source     = 'a\ts\td\tf\tg\th\tj\tk\tl\n' +
                         '1\t2\t3\t4\t5\t6\t7\t8\t9';
+    $scope.array      = undefined;
     $scope.target     = emptyText;
 
-    $scope.tab2array = function(s) {
+
+    $scope.tab2array = function() {
+      var s = $scope.source;
       if (!s) return;
 
       //deduplicate multiple consecutive line breaks
@@ -47,32 +50,28 @@ angular.module('myApp.controllers', [])
 
       //split on line breaks
       var a = s.split(/\n\r?/);
-      console.log(a);
       
       if (a.length === 0) return;
       
       //split each line on tabs
       a = _.map(a, function(item) { return item.split(/\t/); });
 
-      //potentially transpose
-      if ($scope.transposed) 
-        a = _.zip.apply(_, a); //http://stackoverflow.com/a/17428779/1385429
-
       return a;
     };
 
-    $scope.array2tab = function(a) {
+    $scope.array2tab = function() {
+      var a = $scope.array;
       if (!a) return;
 
       //split each line on tabs
       var b = _.map(a, function(item) { return item.join('\t'); });
 
       return b.join('\n');
-    }    
+    }
 
-    function tab2html(s) {
-      var a = $scope.tab2array(s);
 
+    $scope.formatter = function() {
+      var a = $scope.array;
       if (!a) return;
 
       var sep = 'th', line;
@@ -82,7 +81,7 @@ angular.module('myApp.controllers', [])
         return line;
       });
 
-      s = [
+      var s = [
         '<table class="tableizer" id="tableOne">',
         '  <thead>',
         '    <tr>' + a.shift() + '</tr>', //shift returns removed item
@@ -111,9 +110,16 @@ angular.module('myApp.controllers', [])
     //options: trim all values, transpose, remove trailing lines
 
     $scope.transform = function() {
-      var html = tab2html($scope.source);
-
-      $scope.target = html || emptyText;
+      $scope.array  = $scope.tab2array();
+      $scope.target = $scope.formatter() || emptyText;
+    };
+    $scope.transpose = function() {
+      if (!$scope.array) {
+        $scope.array = $scope.tab2array();
+      }
+      $scope.array = _.zip.apply(_, $scope.array); //http://stackoverflow.com/a/17428779/1385429
+      $scope.source = $scope.array2tab();
+      $scope.target = $scope.formatter() || emptyText;
     };
 
   }]).filter('unsafe', ['$sce', function ($sce) {

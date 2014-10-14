@@ -51,10 +51,10 @@
         wrap="off"
         style="resize: both; width: 100%;"></textarea>
       <input
-        type="checkbox"
-        ng-model="transposed"
-        ng-change="transform()"
-      > transpose
+        type="button"
+        value="transpose"
+        ng-click="transpose()"
+      >
       <input
         type="checkbox"
         ng-model="dedupmulti"
