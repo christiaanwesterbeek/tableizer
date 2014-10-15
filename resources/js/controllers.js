@@ -154,6 +154,10 @@ angular.module('myApp.controllers', [])
 
     //options: trim all values, transpose, remove trailing lines
 
+    $scope.$watch('format', function(value) {
+      $scope.transform();
+    });
+
     $scope.transform = function() {
       $scope.array  = $scope.tab2array();
       $scope.target = $scope.formatter();
