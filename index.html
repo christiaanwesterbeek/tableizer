@@ -49,6 +49,11 @@
         wrap="off"
         style="resize: both; width: 100%;"></textarea>
       <input
+        ng-model="array"
+        json-text
+        disabled
+        style="width: 100%; margin: 0.4em 0em;">
+      <input
         type="button"
         value="transpose"
         ng-click="transpose()"
@@ -91,13 +96,6 @@
         value="text"
       > text
     </div>
-    <hr>
-      <input
-        ng-model="array"
-        json-text
-        disabled
-        style="width: 100%;">
-    <hr>
     <span ng-bind-html="message | unsafe" class="unimportant"></span>
     <div ng-bind-html="target | unsafe" style="width: 889px; max-width: 883px;"></div>
     <!-- End copy here to gh-pages version of index.html -->
