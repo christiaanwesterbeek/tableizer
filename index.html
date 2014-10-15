@@ -71,6 +71,25 @@
         value="text"
         ng-click="transform()"
       > text
+      &nbsp;|&nbsp;
+      <input
+        type="text"
+        ng-model="findValue"
+        placeholder="find what"
+        style="width: 80px;"
+      >
+      <input
+        type="text"
+        ng-model="replaceValue"
+        placeholder="replace with"
+        style="width: 80px;"
+      >
+      <input
+        type="button"
+        value="replace"
+        ng-click="findReplace()"
+        style="width: 80px;"
+      >      
     </div>
     <hr>
       <input

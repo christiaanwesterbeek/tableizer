@@ -175,6 +175,15 @@ angular.module('myApp.controllers', [])
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : 'Psst, try to drag the columns...<span class="delete-column" style="border: 2px dashed #ccc;">or drop here to delete it.</span>';
     };
+    $scope.findReplace = function() {
+      if (!$scope.findValue)
+        return
+      $scope.source = $scope.source && $scope.source.split($scope.findValue).join($scope.replaceValue);
+      $scope.array = $scope.tab2array();
+
+      $scope.target = $scope.formatter();
+      $scope.message = ($scope.format === 'text') ? '' : 'Psst, try to drag the columns...<span class="delete-column" style="border: 2px dashed #ccc;">or drop here to delete it.</span>';
+    };
 
   }])
   .filter('unsafe', ['$sce', function ($sce) {
