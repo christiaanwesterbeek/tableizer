@@ -45,6 +45,7 @@ angular.module('myApp.controllers', [])
                         '1\t2\t3\t4\t5\t6\t7\t8\t9';
     $scope.array      = undefined;
     $scope.target     = undefined;
+    $scope.format     = 'html';
 
     $scope.tab2array = function() {
       var s = $scope.source;
@@ -73,8 +74,52 @@ angular.module('myApp.controllers', [])
 
 
     $scope.formatter = function() {
-      var a = $scope.array;
+      var a = $scope.array, s;
       if (!a) return;
+
+      /**
+       * a:  input // (int or string) or undefined,NaN,false,empty string default:0
+       * PadLength // (int) default:2
+       * PadCharacter // (string or int) default:'0'
+       * PadDirection // (boolean) default:0 (padLeft) - (true or 1) is padRight 
+       */
+      function pad(a,b,c,d){ //http://stackoverflow.com/a/21348957/1385429
+        return a=(a||c||0)+'',b=new Array((++b||3)-a.length).join(c||0),d?a+b:b+a
+      }
+
+      if ($scope.format === 'text') {
+        //calculate max length per columm
+        //[["a","s","d","f","g","h","j","k","l"],["1","2","3","4","5","6","7","8","98"]]
+        //console.log(1, a);
+        //create an array per columns by using transposition
+        var columns = _.zip.apply(_, $scope.array); //http://stackoverflow.com/a/17428779/1385429
+        //columns: [["a","1"],["s","2"],["d","3"],["f","4"],["g","5"],["h","6"],["j","7"],["k","8"],["l","98"]]
+        //console.log(2, columns);
+
+        //Calculate the max length per column
+        var lengths = _.map(columns, function(item) {
+          return Math.max.apply(Math, _.map(item, function (el) { return el.length }));
+        });
+        //lengths: [1, 1, 1, 1, 1, 1, 1, 1, 2]
+        //console.log(3, lengths);
+
+        //pad the values of each column to the length of the longest value in the column
+        for (var l = lengths.length - 1, i = l; i>=0; i-- ) { //lengths and columns have the same length
+          columns[i] = _.map(columns[i], function(item) { return pad(item, lengths[i], ' ', true); });
+        }
+        //console.log(4, columns);
+        //transpose back the to the original array (with padded values)
+        a = _.zip.apply(_, columns);
+
+        //join each line with a space
+        a = _.map(a, function(item) { return item.join(' '); });
+
+        return [
+          '<pre>',
+          a.join('\n'),
+          '</pre>'
+        ].join('\n');
+      }
 
       var sep = 'th', line;
       a = _.map(a, function(item) {
@@ -83,7 +128,7 @@ angular.module('myApp.controllers', [])
         return line;
       });
 
-      var s = [
+      return [
         '<table class="tableizer" id="tableOne">',
         '  <thead>',
         '    <tr>' + a.shift() + '</tr>', //shift returns removed item
@@ -105,8 +150,6 @@ angular.module('myApp.controllers', [])
       //draggable columns thanks to:
       //- http://www.danvk.org/wp/dragtable/
       //- http://bytes.com/topic/javascript/insights/750692-drag-drop-table-columns-new-version-explained
-
-      return s;
     }
 
     //options: trim all values, transpose, remove trailing lines
@@ -138,4 +181,21 @@ angular.module('myApp.controllers', [])
     return function (val) {
         return $sce.trustAsHtml(val);
     };
-  }]);
+  }])
+  .directive('jsonText', function() {
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModel) {            
+        function into(input) {
+          console.log(JSON.parse(input));
+          return JSON.parse(input);
+        }
+        function out(data) {
+          return JSON.stringify(data);
+        }
+        ngModel.$parsers.push(into);
+        ngModel.$formatters.push(out);
+      }
+    };
+});

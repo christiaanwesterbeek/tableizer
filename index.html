@@ -57,7 +57,27 @@
         value="remove empty lines"
         ng-click="removeEmptyLines()"
       >
+      <input
+        type="radio"
+        ng-model="format"
+        name="format"
+        value="html"
+        ng-click="transform()"
+      > html
+      <input
+        type="radio"
+        ng-model="format"
+        name="format"
+        value="text"
+        ng-click="transform()"
+      > text
     </div>
+    <hr>
+      <input
+        ng-model="array"
+        json-text
+        disabled
+        style="width: 100%;">
     <hr>
     <span ng-bind-html="message | unsafe" class="unimportant"></span>
     <div ng-bind-html="target | unsafe" style="width: 889px; max-width: 883px;"></div>
