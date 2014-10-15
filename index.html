@@ -53,24 +53,7 @@
         value="transpose"
         ng-click="transpose()"
       >
-      <input
-        type="button"
-        value="remove empty lines"
-        ng-click="removeEmptyLines()"
-      >
-      <input
-        type="radio"
-        ng-model="format"
-        name="format"
-        value="html"
-      > html
-      <input
-        type="radio"
-        ng-model="format"
-        name="format"
-        value="text"
-      > text
-      &nbsp;|&nbsp;
+      &nbsp;&nbsp;&nbsp;
       <input
         type="text"
         ng-model="findValue"
@@ -89,6 +72,24 @@
         ng-click="findReplace()"
         style="width: 80px;"
       >      
+      <input
+        type="button"
+        value="remove empty lines"
+        ng-click="removeEmptyLines()"
+      >
+      &nbsp;&nbsp;&nbsp;format:
+      <input
+        type="radio"
+        ng-model="format"
+        name="format"
+        value="html"
+      > html
+      <input
+        type="radio"
+        ng-model="format"
+        name="format"
+        value="text"
+      > text
     </div>
     <hr>
       <input
