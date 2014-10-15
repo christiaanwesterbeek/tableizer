@@ -53,10 +53,10 @@
         ng-click="transpose()"
       >
       <input
-        type="checkbox"
-        ng-model="dedupmulti"
-        ng-change="transform()"
-      > deduplicate multiple consecutive line breaks
+        type="button"
+        value="remove empty lines"
+        ng-click="removeEmptyLines()"
+      >
     </div>
     <hr>
     <span ng-bind-html="message | unsafe" class="unimportant"></span>
