@@ -41,6 +41,7 @@
       </div>
     </div>
     <hr>
+    <!-- Start copy here to gh-pages version of index.html -->
     <div style="padding-right: 10px;">
       <textarea
         ng-model="source"
@@ -56,14 +57,54 @@
         ng-click="transpose()"
       >
       <input
-        type="checkbox"
-        ng-model="dedupmulti"
-        ng-change="transform()"
-      > deduplicate multiple consecutive line breaks
+        type="button"
+        value="remove empty lines"
+        ng-click="removeEmptyLines()"
+      >
+      <input
+        type="radio"
+        ng-model="format"
+        name="format"
+        value="html"
+        ng-click="transform()"
+      > html
+      <input
+        type="radio"
+        ng-model="format"
+        name="format"
+        value="text"
+        ng-click="transform()"
+      > text
+      &nbsp;|&nbsp;
+      <input
+        type="text"
+        ng-model="findValue"
+        placeholder="find what"
+        style="width: 80px;"
+      >
+      <input
+        type="text"
+        ng-model="replaceValue"
+        placeholder="replace with"
+        style="width: 80px;"
+      >
+      <input
+        type="button"
+        value="replace"
+        ng-click="findReplace()"
+        style="width: 80px;"
+      >      
     </div>
+    <hr>
+      <input
+        ng-model="array"
+        json-text
+        disabled
+        style="width: 100%;">
     <hr>
     <span ng-bind-html="message | unsafe" class="unimportant"></span>
     <div ng-bind-html="target | unsafe" style="width: 889px; max-width: 883px;"></div>
+    <!-- End copy here to gh-pages version of index.html -->
     <div id="faq" class="hide">
       <h3>
         FAQ
