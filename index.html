@@ -52,30 +52,16 @@
         wrap="off"
         style="resize: both; width: 100%;"></textarea>
       <input
+        ng-model="array"
+        json-text
+        disabled
+        style="width: 100%; margin: 0.4em 0em;">
+      <input
         type="button"
         value="transpose"
         ng-click="transpose()"
       >
-      <input
-        type="button"
-        value="remove empty lines"
-        ng-click="removeEmptyLines()"
-      >
-      <input
-        type="radio"
-        ng-model="format"
-        name="format"
-        value="html"
-        ng-click="transform()"
-      > html
-      <input
-        type="radio"
-        ng-model="format"
-        name="format"
-        value="text"
-        ng-click="transform()"
-      > text
-      &nbsp;|&nbsp;
+      &nbsp;&nbsp;&nbsp;
       <input
         type="text"
         ng-model="findValue"
@@ -94,14 +80,25 @@
         ng-click="findReplace()"
         style="width: 80px;"
       >      
-    </div>
-    <hr>
       <input
-        ng-model="array"
-        json-text
-        disabled
-        style="width: 100%;">
-    <hr>
+        type="button"
+        value="remove empty lines"
+        ng-click="removeEmptyLines()"
+      >
+      &nbsp;&nbsp;&nbsp;format:
+      <input
+        type="radio"
+        ng-model="format"
+        name="format"
+        value="html"
+      > html
+      <input
+        type="radio"
+        ng-model="format"
+        name="format"
+        value="text"
+      > text
+    </div>
     <span ng-bind-html="message | unsafe" class="unimportant"></span>
     <div ng-bind-html="target | unsafe" style="width: 889px; max-width: 883px;"></div>
     <!-- End copy here to gh-pages version of index.html -->
