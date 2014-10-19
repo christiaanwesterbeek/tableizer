@@ -96,8 +96,13 @@
         value="text"
       > text
     </div>
-    <span ng-bind-html="message | unsafe" class="unimportant"></span>
-    <div ng-bind-html="target | unsafe" style="width: 889px; max-width: 883px;"></div>
+    <span
+      ng-bind-html="message | unsafe"
+      class="unimportant"></span>
+    <div
+      ng-bind-html="target | unsafe"
+      style="width: 100%; height: 250px; overflow: auto;">      
+    </div>
     <!-- End copy here to gh-pages version of index.html -->
     <div id="faq" class="hide">Not maintained here. Go to the demo to read the faq</div>
   </div>
