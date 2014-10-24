@@ -188,6 +188,21 @@ angular.module('myApp.controllers', [])
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : 'Psst, try to drag the columns...<span class="delete-column" style="border: 2px dashed #ccc;">or drop here to delete it.</span>';
     };
+    $scope.selectAll = function () {
+      //http://stackoverflow.com/a/20079910/1385429
+      var node = document.getElementById( 'target' );
+
+      if ( document.selection ) {
+        var range = document.body.createTextRange();
+        range.moveToElementText( node  );
+        range.select();
+      } else if ( window.getSelection ) {
+        var range = document.createRange();
+        range.selectNodeContents( node );
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange( range );
+      }      
+    };
 
   }])
   .filter('unsafe', ['$sce', function ($sce) {
