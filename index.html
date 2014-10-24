@@ -102,6 +102,8 @@
         ng-click="selectAll()"
         style="width: 80px;"
       >     
+      &nbsp;&nbsp;&nbsp;
+      <a ng-click="isFaqOpen = !isFaqOpen">faq</a>
     </div>
     <span
       ng-bind-html="message | unsafe"
@@ -111,7 +113,7 @@
       id="target"
       style="width: 100%; height: 250px; overflow: auto;"></div>
     <!-- End copy here to gh-pages version of index.html -->
-    <div id="faq" class="hide">Not maintained here. Go to the demo to read the faq</div>
+    <div id="faq" ng-show="isFaqOpen">Not maintained here. Go to the demo to read the faq</div>
   </div>
 
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.js"></script>
