@@ -39,6 +39,8 @@ window._swapColumns = function(oldIndex, newIndex, droppedElm) {
 /* Controllers */
 angular.module('myApp.controllers', [])
   .controller('MainCtrl', ['$scope', function($scope) {
+    var dragColumnsTip = 'Psst, try to drag the columns...<span class="delete-column" style="border: 2px dashed #ccc;">or drop here to delete it.</span>';
+
     $scope.message    = 'Formatted table will appear here. Paste your tabular data in the area above.'
     $scope.dedupmulti = true;
     $scope.source     = ''; //'a\ts\td\tf\tg\th\tj\tk\tl\n' + '1\t2\t3\t4\t5\t6\t7\t8\t9';
@@ -160,7 +162,7 @@ angular.module('myApp.controllers', [])
     $scope.transform = function() {
       $scope.array  = $scope.tab2array();
       $scope.target = $scope.formatter();
-      $scope.message = ($scope.format === 'text') ? '' : 'Psst, try to drag the columns...<span class="delete-column" style="border: 2px dashed #ccc;">or drop here to delete it.</span>';
+      $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
     };
     $scope.transpose = function() {
       if (!$scope.array) {
@@ -169,14 +171,14 @@ angular.module('myApp.controllers', [])
       $scope.array = _.zip.apply(_, $scope.array); //http://stackoverflow.com/a/17428779/1385429
       $scope.source = $scope.array2tab();
       $scope.target = $scope.formatter();
-      $scope.message = ($scope.format === 'text') ? '' : 'Psst, try to drag the columns...<span class="delete-column" style="border: 2px dashed #ccc;">or drop here to delete it.</span>';
+      $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
     };
     $scope.removeEmptyLines = function() {
       $scope.source = $scope.source && $scope.source.replace(/(\n\r?)+/g, '\n');
       $scope.array = $scope.tab2array();
 
       $scope.target = $scope.formatter();
-      $scope.message = ($scope.format === 'text') ? '' : 'Psst, try to drag the columns...<span class="delete-column" style="border: 2px dashed #ccc;">or drop here to delete it.</span>';
+      $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
     };
     $scope.findReplace = function() {
       if (!$scope.findValue)
@@ -185,7 +187,7 @@ angular.module('myApp.controllers', [])
       $scope.array = $scope.tab2array();
 
       $scope.target = $scope.formatter();
-      $scope.message = ($scope.format === 'text') ? '' : 'Psst, try to drag the columns...<span class="delete-column" style="border: 2px dashed #ccc;">or drop here to delete it.</span>';
+      $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
     };
     $scope.selectAll = function () {
       //http://stackoverflow.com/a/20079910/1385429
