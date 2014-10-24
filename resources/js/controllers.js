@@ -41,8 +41,7 @@ angular.module('myApp.controllers', [])
   .controller('MainCtrl', ['$scope', function($scope) {
     $scope.message    = 'Formatted table will appear here. Paste your tabular data in the area above.'
     $scope.dedupmulti = true;
-    $scope.source     = 'a\ts\td\tf\tg\th\tj\tk\tl\n' +
-                        '1\t2\t3\t4\t5\t6\t7\t8\t9';
+    $scope.source     = ''; //'a\ts\td\tf\tg\th\tj\tk\tl\n' + '1\t2\t3\t4\t5\t6\t7\t8\t9';
     $scope.array      = undefined;
     $scope.target     = undefined;
     $scope.format     = 'html';
