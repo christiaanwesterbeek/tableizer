@@ -34,14 +34,14 @@ window._swapColumns = function(oldIndex, newIndex, droppedElm) {
   scope.source = scope.array2tab();
   scope.target = scope.formatter();
   scope.$apply();
-}
+};
 
 /* Controllers */
 angular.module('myApp.controllers', [])
   .controller('MainCtrl', ['$scope', function($scope) {
     var dragColumnsTip = 'Psst, try to drag the columns...<span class="delete-column" style="border: 2px dashed #ccc;">or drop here to delete it.</span>';
 
-    $scope.message    = 'Formatted table will appear here. Paste your tabular data in the area above.'
+    $scope.message    = 'Formatted table will appear here. Paste your tabular data in the area above.';
     $scope.dedupmulti = true;
     $scope.source     = ''; //'a\ts\td\tf\tg\th\tj\tk\tl\n' + '1\t2\t3\t4\t5\t6\t7\t8\t9';
     $scope.array      = undefined;
@@ -71,7 +71,7 @@ angular.module('myApp.controllers', [])
       var b = _.map(a, function(item) { return item.join('\t'); });
 
       return b.join('\n');
-    }
+    };
 
 
     $scope.formatter = function() {
@@ -151,7 +151,7 @@ angular.module('myApp.controllers', [])
       //draggable columns thanks to:
       //- http://www.danvk.org/wp/dragtable/
       //- http://bytes.com/topic/javascript/insights/750692-drag-drop-table-columns-new-version-explained
-    }
+    };
 
     //options: trim all values, transpose, remove trailing lines
 
@@ -182,7 +182,7 @@ angular.module('myApp.controllers', [])
     };
     $scope.findReplace = function() {
       if (!$scope.findValue)
-        return
+        return;
       $scope.source = $scope.source && $scope.source.split($scope.findValue).join($scope.replaceValue);
       $scope.array = $scope.tab2array();
 
@@ -217,7 +217,7 @@ angular.module('myApp.controllers', [])
       require: 'ngModel',
       link: function(scope, element, attr, ngModel) {            
         function into(input) {
-          console.log(JSON.parse(input));
+          //console.log(JSON.parse(input));
           return JSON.parse(input);
         }
         function out(data) {
