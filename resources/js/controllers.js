@@ -47,7 +47,7 @@ angular.module('myApp.controllers', [])
     $scope.array      = undefined;
     $scope.target     = undefined;
     $scope.format     = 'html';
-    $scope.working    = false;
+    $scope.working    = '';
 
     $scope.tab2array = function() {
       var s = $scope.source;
@@ -161,14 +161,14 @@ angular.module('myApp.controllers', [])
     });
 
     $scope.transform = function() {
-      $scope.working = true;$scope.$apply();
+      $scope.working = 'Working...';
       $scope.array  = $scope.tab2array();
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
-      $scope.working = false;
+      $scope.working = '';
     };
     $scope.transpose = function() {
-      $scope.working = true;$scope.$apply();
+      $scope.working = 'Working...';
       if (!$scope.array) {
         $scope.array = $scope.tab2array();
       }
@@ -176,19 +176,19 @@ angular.module('myApp.controllers', [])
       $scope.source = $scope.array2tab();
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
-      $scope.working = false;
+      $scope.working = '';
     };
     $scope.removeEmptyLines = function() {
-      $scope.working = true;$scope.$apply();
+      $scope.working = 'Working...';
       $scope.source = $scope.source && $scope.source.replace(/(\n\r?)+/g, '\n');
       $scope.array = $scope.tab2array();
 
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
-      $scope.working = false;
+      $scope.working = '';
     };
     $scope.findReplace = function() {
-      $scope.working = true;$scope.$apply();
+      $scope.working = 'Working...';
       if (!$scope.findValue)
         return;
       $scope.source = $scope.source && $scope.source.split($scope.findValue).join($scope.replaceValue);
@@ -196,7 +196,7 @@ angular.module('myApp.controllers', [])
 
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
-      $scope.working = false;
+      $scope.working = '';
     };
     $scope.selectAll = function () {
       //http://stackoverflow.com/a/20079910/1385429
