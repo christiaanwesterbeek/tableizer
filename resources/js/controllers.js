@@ -47,6 +47,7 @@ angular.module('myApp.controllers', [])
     $scope.array      = undefined;
     $scope.target     = undefined;
     $scope.format     = 'html';
+    $scope.loading    = false;
 
     $scope.tab2array = function() {
       var s = $scope.source;
@@ -160,11 +161,14 @@ angular.module('myApp.controllers', [])
     });
 
     $scope.transform = function() {
+      $scope.loading = true;
       $scope.array  = $scope.tab2array();
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
+      $scope.loading = false;
     };
     $scope.transpose = function() {
+      $scope.loading = true;
       if (!$scope.array) {
         $scope.array = $scope.tab2array();
       }
@@ -172,15 +176,19 @@ angular.module('myApp.controllers', [])
       $scope.source = $scope.array2tab();
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
+      $scope.loading = false;
     };
     $scope.removeEmptyLines = function() {
+      $scope.loading = true;
       $scope.source = $scope.source && $scope.source.replace(/(\n\r?)+/g, '\n');
       $scope.array = $scope.tab2array();
 
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
+      $scope.loading = false;
     };
     $scope.findReplace = function() {
+      $scope.loading = true;
       if (!$scope.findValue)
         return;
       $scope.source = $scope.source && $scope.source.split($scope.findValue).join($scope.replaceValue);
@@ -188,6 +196,7 @@ angular.module('myApp.controllers', [])
 
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
+      $scope.loading = false;
     };
     $scope.selectAll = function () {
       //http://stackoverflow.com/a/20079910/1385429
