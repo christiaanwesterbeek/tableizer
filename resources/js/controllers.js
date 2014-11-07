@@ -38,7 +38,7 @@ window._swapColumns = function(oldIndex, newIndex, droppedElm) {
 
 /* Controllers */
 angular.module('myApp.controllers', [])
-  .controller('MainCtrl', ['$scope', function($scope) {
+  .controller('MainCtrl', ['$scope', 'cfpLoadingBar', function($scope, cfpLoadingBar) {
     var dragColumnsTip = 'Psst, try to drag the columns...<span class="delete-column" style="border: 2px dashed #ccc;">or drop here to delete it.</span>';
 
     $scope.message    = 'Formatted table will appear here. Paste your tabular data in the area above.';
@@ -47,7 +47,6 @@ angular.module('myApp.controllers', [])
     $scope.array      = undefined;
     $scope.target     = undefined;
     $scope.format     = 'html';
-    $scope.working    = '';
 
     $scope.tab2array = function() {
       var s = $scope.source;
@@ -161,14 +160,14 @@ angular.module('myApp.controllers', [])
     });
 
     $scope.transform = function() {
-      $scope.working = 'Working...';
+      cfpLoadingBar.start();
       $scope.array  = $scope.tab2array();
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
-      $scope.working = '';
+      cfpLoadingBar.complete();
     };
     $scope.transpose = function() {
-      $scope.working = 'Working...';
+      cfpLoadingBar.start();
       if (!$scope.array) {
         $scope.array = $scope.tab2array();
       }
@@ -176,19 +175,19 @@ angular.module('myApp.controllers', [])
       $scope.source = $scope.array2tab();
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
-      $scope.working = '';
+      cfpLoadingBar.complete();
     };
     $scope.removeEmptyLines = function() {
-      $scope.working = 'Working...';
+      //cfpLoadingBar.start();
       $scope.source = $scope.source && $scope.source.replace(/(\n\r?)+/g, '\n');
       $scope.array = $scope.tab2array();
 
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
-      $scope.working = '';
+      cfpLoadingBar.complete();
     };
     $scope.findReplace = function() {
-      $scope.working = 'Working...';
+      cfpLoadingBar.start();
       if (!$scope.findValue)
         return;
       $scope.source = $scope.source && $scope.source.split($scope.findValue).join($scope.replaceValue);
@@ -196,7 +195,7 @@ angular.module('myApp.controllers', [])
 
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
-      $scope.working = '';
+      cfpLoadingBar.complete();
     };
     $scope.selectAll = function () {
       //http://stackoverflow.com/a/20079910/1385429

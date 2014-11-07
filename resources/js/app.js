@@ -7,5 +7,7 @@ var myApp = angular.module('myApp', [
   'myApp.services',
   'myApp.directives',
   'myApp.controllers',
-  'ngSanitize' //http://stackoverflow.com/questions/9381926/insert-html-into-view-using-angularjs
+  'ngSanitize', //http://stackoverflow.com/questions/9381926/insert-html-into-view-using-angularjs
+  'cfp.loadingBar' //https://github.com/chieffancypants/angular-loading-bar
 ]);
+
