@@ -161,14 +161,14 @@ angular.module('myApp.controllers', [])
     });
 
     $scope.transform = function() {
-      $scope.working = true;
+      $scope.working = true;$scope.$apply();
       $scope.array  = $scope.tab2array();
       $scope.target = $scope.formatter();
       $scope.message = ($scope.format === 'text') ? '' : dragColumnsTip;
       $scope.working = false;
     };
     $scope.transpose = function() {
-      $scope.working = true;
+      $scope.working = true;$scope.$apply();
       if (!$scope.array) {
         $scope.array = $scope.tab2array();
       }
@@ -179,7 +179,7 @@ angular.module('myApp.controllers', [])
       $scope.working = false;
     };
     $scope.removeEmptyLines = function() {
-      $scope.working = true;
+      $scope.working = true;$scope.$apply();
       $scope.source = $scope.source && $scope.source.replace(/(\n\r?)+/g, '\n');
       $scope.array = $scope.tab2array();
 
@@ -188,7 +188,7 @@ angular.module('myApp.controllers', [])
       $scope.working = false;
     };
     $scope.findReplace = function() {
-      $scope.working = true;
+      $scope.working = true;$scope.$apply();
       if (!$scope.findValue)
         return;
       $scope.source = $scope.source && $scope.source.split($scope.findValue).join($scope.replaceValue);
